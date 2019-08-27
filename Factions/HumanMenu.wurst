@@ -1,0 +1,1000 @@
+package HumanMenu
+
+import UnitIds
+import Icons
+import ClosureFrames
+import UIGrid
+import initlater SpawnMenu
+
+public framehandle humanRaceFrame
+framehandle humanRaceButton
+angle FACE = angle(270.)
+
+public function initHumanMenu()
+    int c // context
+    int uID
+    vec2 v
+    real w
+    string icon
+    string name
+    framehandle f
+    framehandle tool
+
+    humanRaceButton = createFrame("CheatMenuButton", cheatMenuFrame, 0, 0)
+    ..setAbsPoint(FRAMEPOINT_CENTER, D5.x, D5.y + BUTTON_OFFSET)
+    ..setText("Alliance")
+    ..onClick() () ->
+        let i = GetTriggerPlayer().getId()
+        let p = Player(currentOwnerId[i])
+        activeFrame[i].setVisibleFor(p, false)
+        activeFrame[i] = humanRaceFrame
+        activeFrame[i].setVisibleFor(p, true)
+    
+    humanRaceFrame = createFrame("MenuItemTreeBackdrop", cheatMenuFrame, 0, 0)
+
+    createFrame("MenuItemTreeTitleText", humanRaceFrame, 0, 0)
+    ..setAbsPoint(FRAMEPOINT_CENTER, J1.x, J1.y + TITLE_OFFSET)
+    ..setText("The Alliance")
+
+    createFrame("CategoryType", humanRaceFrame, 0, 0)
+    ..setAbsPoint(FRAMEPOINT_CENTER, D1.x, D1.y + CATEGORY_OFFSET)
+    ..setText("Units")
+
+    createFrame("CategoryType", humanRaceFrame, 0, 0)
+    ..setAbsPoint(FRAMEPOINT_CENTER, J1.x, J1.y + CATEGORY_OFFSET)
+    ..setText("Buildings")
+
+    createFrame("CategoryType", humanRaceFrame, 0, 0)
+    ..setAbsPoint(FRAMEPOINT_CENTER, P1.x, P1.y + CATEGORY_OFFSET)
+    ..setText("Heroes")
+
+
+
+    /* ******************************************************************************************************************************
+    *********************************************************************************************************************************
+    
+    UNITS
+    
+    *********************************************************************************************************************************
+    ****************************************************************************************************************************** */
+
+    // Peasant
+
+    c = 0
+    v = C1
+    uID = UnitIds.peasant
+    name = "Peasant"
+    icon = Icons.bTNPeasant
+    w = TOOLTIP_WIDTH * name.length()
+
+    f = createFrame("MenuItemButton", humanRaceFrame, 0, c)
+    ..setAbsPoint(FRAMEPOINT_CENTER, v)
+    ..onClick() () ->
+        let i = GetTriggerPlayer().getId()
+        let p = Player(currentOwnerId[i])
+        for n = 1 to spawnCount[i]
+            createUnit(p, uID, spawnLoc[i], FACE)
+
+    getFrameByName("MenuItemButtonBackdrop", c).setTexture(icon, 0, true)
+    getFrameByName("MenuItemButtonPushedBackdrop", c).setTexture(icon, 0, true)
+    //getFrameByName("MenuItemButtonDisabledBackdrop", c).setTexture(Icons.dISBTNPeasant, 0, true)
+
+    tool = createFrame("BoxedText", f, 0, c)
+    ..setAbsPoint(FRAMEPOINT_TOPLEFT, v.x + TOOLTIP_X_OFFSET, v.y + TOOLTIP_Y_OFFSET)
+    ..setSize(w, TOOLTIP_HEIGHT)
+    getFrameByName("BoxedTextTitle", c).setText(name)
+
+    f.setTooltip(tool)
+
+    // Footman
+
+    c = 0
+    v = D1
+    uID = UnitIds.footman
+    name = "Footman"
+    icon = Icons.bTNFootman
+    w = TOOLTIP_WIDTH * name.length()
+
+    f = createFrame("MenuItemButton", humanRaceFrame, 0, c)
+    ..setAbsPoint(FRAMEPOINT_CENTER, v)
+    ..onClick() () ->
+        let i = GetTriggerPlayer().getId()
+        let p = Player(currentOwnerId[i])
+        for n = 1 to spawnCount[i]
+            createUnit(p, uID, spawnLoc[i], FACE)
+
+    getFrameByName("MenuItemButtonBackdrop", c).setTexture(icon, 0, true)
+    getFrameByName("MenuItemButtonPushedBackdrop", c).setTexture(icon, 0, true)
+
+    tool = createFrame("BoxedText", f, 0, c)
+    ..setAbsPoint(FRAMEPOINT_TOPLEFT, v.x + TOOLTIP_X_OFFSET, v.y + TOOLTIP_Y_OFFSET)
+    ..setSize(w, TOOLTIP_HEIGHT)
+    getFrameByName("BoxedTextTitle", c).setText(name)
+
+    f.setTooltip(tool)
+
+    // Rifleman
+
+    c = 0
+    v = E1
+    uID = UnitIds.rifleman
+    name = "Rifleman"
+    icon = Icons.bTNRifleman
+    w = TOOLTIP_WIDTH * name.length()
+
+    f = createFrame("MenuItemButton", humanRaceFrame, 0, c)
+    ..setAbsPoint(FRAMEPOINT_CENTER, v)
+    ..onClick() () ->
+        let i = GetTriggerPlayer().getId()
+        let p = Player(currentOwnerId[i])
+        for n = 1 to spawnCount[i]
+            createUnit(p, uID, spawnLoc[i], FACE)
+
+    getFrameByName("MenuItemButtonBackdrop", c).setTexture(icon, 0, true)
+    getFrameByName("MenuItemButtonPushedBackdrop", c).setTexture(icon, 0, true)
+
+    tool = createFrame("BoxedText", f, 0, c)
+    ..setAbsPoint(FRAMEPOINT_TOPLEFT, v.x + TOOLTIP_X_OFFSET, v.y + TOOLTIP_Y_OFFSET)
+    ..setSize(w, TOOLTIP_HEIGHT)
+    getFrameByName("BoxedTextTitle", c).setText(name)
+
+    f.setTooltip(tool)
+
+    // Knight
+
+    c = 0
+    v = C2
+    uID = UnitIds.knight
+    name = "Knight"
+    icon = Icons.bTNKnight
+    w = TOOLTIP_WIDTH * name.length()
+
+    f = createFrame("MenuItemButton", humanRaceFrame, 0, c)
+    ..setAbsPoint(FRAMEPOINT_CENTER, v)
+    ..onClick() () ->
+        let i = GetTriggerPlayer().getId()
+        let p = Player(currentOwnerId[i])
+        for n = 1 to spawnCount[i]
+            createUnit(p, uID, spawnLoc[i], FACE)
+
+    getFrameByName("MenuItemButtonBackdrop", c).setTexture(icon, 0, true)
+    getFrameByName("MenuItemButtonPushedBackdrop", c).setTexture(icon, 0, true)
+
+    tool = createFrame("BoxedText", f, 0, c)
+    ..setAbsPoint(FRAMEPOINT_TOPLEFT, v.x + TOOLTIP_X_OFFSET, v.y + TOOLTIP_Y_OFFSET)
+    ..setSize(w, TOOLTIP_HEIGHT)
+    getFrameByName("BoxedTextTitle", c).setText(name)
+
+    f.setTooltip(tool)
+
+    // Priest
+    
+    c = 0
+    v = D2
+    uID = UnitIds.priest
+    name = "Priest"
+    icon = Icons.bTNPriest
+    w = TOOLTIP_WIDTH * name.length()
+
+    f = createFrame("MenuItemButton", humanRaceFrame, 0, c)
+    ..setAbsPoint(FRAMEPOINT_CENTER, v)
+    ..onClick() () ->
+        let i = GetTriggerPlayer().getId()
+        let p = Player(currentOwnerId[i])
+        for n = 1 to spawnCount[i]
+            createUnit(p, uID, spawnLoc[i], FACE)
+
+    getFrameByName("MenuItemButtonBackdrop", c).setTexture(icon, 0, true)
+    getFrameByName("MenuItemButtonPushedBackdrop", c).setTexture(icon, 0, true)
+
+    tool = createFrame("BoxedText", f, 0, c)
+    ..setAbsPoint(FRAMEPOINT_TOPLEFT, v.x + TOOLTIP_X_OFFSET, v.y + TOOLTIP_Y_OFFSET)
+    ..setSize(w, TOOLTIP_HEIGHT)
+    getFrameByName("BoxedTextTitle", c).setText(name)
+
+    f.setTooltip(tool)
+
+    // Sorceress
+
+    c = 0
+    v = E2
+    uID = UnitIds.sorceress
+    name = "Sorceress"
+    icon = Icons.bTNSorceress
+    w = TOOLTIP_WIDTH * name.length()
+
+    f = createFrame("MenuItemButton", humanRaceFrame, 0, c)
+    ..setAbsPoint(FRAMEPOINT_CENTER, v)
+    ..onClick() () ->
+        let i = GetTriggerPlayer().getId()
+        let p = Player(currentOwnerId[i])
+        for n = 1 to spawnCount[i]
+            createUnit(p, uID, spawnLoc[i], FACE)
+
+    getFrameByName("MenuItemButtonBackdrop", c).setTexture(icon, 0, true)
+    getFrameByName("MenuItemButtonPushedBackdrop", c).setTexture(icon, 0, true)
+
+    tool = createFrame("BoxedText", f, 0, c)
+    ..setAbsPoint(FRAMEPOINT_TOPLEFT, v.x + TOOLTIP_X_OFFSET, v.y + TOOLTIP_Y_OFFSET)
+    ..setSize(w, TOOLTIP_HEIGHT)
+    getFrameByName("BoxedTextTitle", c).setText(name)
+
+    f.setTooltip(tool)
+
+    // Spell Breaker
+    
+    c = 0
+    v = C3
+    uID = UnitIds.spellbreaker
+    name = "Spell Breaker"
+    icon = Icons.bTNSpellBreaker
+    w = TOOLTIP_WIDTH * name.length()
+
+    f = createFrame("MenuItemButton", humanRaceFrame, 0, c)
+    ..setAbsPoint(FRAMEPOINT_CENTER, v)
+    ..onClick() () ->
+        let i = GetTriggerPlayer().getId()
+        let p = Player(currentOwnerId[i])
+        for n = 1 to spawnCount[i]
+            createUnit(p, uID, spawnLoc[i], FACE)
+
+    getFrameByName("MenuItemButtonBackdrop", c).setTexture(icon, 0, true)
+    getFrameByName("MenuItemButtonPushedBackdrop", c).setTexture(icon, 0, true)
+
+    tool = createFrame("BoxedText", f, 0, c)
+    ..setAbsPoint(FRAMEPOINT_TOPLEFT, v.x + TOOLTIP_X_OFFSET, v.y + TOOLTIP_Y_OFFSET)
+    ..setSize(w, TOOLTIP_HEIGHT)
+    getFrameByName("BoxedTextTitle", c).setText(name)
+
+    f.setTooltip(tool)
+
+    // Flying Machine
+    
+    c = 0
+    v = D3
+    uID = UnitIds.flyingmachine
+    name = "Flying Machine"
+    icon = Icons.bTNFlyingMachine
+    w = TOOLTIP_WIDTH * name.length()
+
+    f = createFrame("MenuItemButton", humanRaceFrame, 0, c)
+    ..setAbsPoint(FRAMEPOINT_CENTER, v)
+    ..onClick() () ->
+        let i = GetTriggerPlayer().getId()
+        let p = Player(currentOwnerId[i])
+        for n = 1 to spawnCount[i]
+            createUnit(p, uID, spawnLoc[i], FACE)
+
+    getFrameByName("MenuItemButtonBackdrop", c).setTexture(icon, 0, true)
+    getFrameByName("MenuItemButtonPushedBackdrop", c).setTexture(icon, 0, true)
+
+    tool = createFrame("BoxedText", f, 0, c)
+    ..setAbsPoint(FRAMEPOINT_TOPLEFT, v.x + TOOLTIP_X_OFFSET, v.y + TOOLTIP_Y_OFFSET)
+    ..setSize(w, TOOLTIP_HEIGHT)
+    getFrameByName("BoxedTextTitle", c).setText(name)
+
+    f.setTooltip(tool)
+
+    // Mortar Team
+    
+    c = 0
+    v = E3
+    uID = UnitIds.mortarteam
+    name = "Mortar Team"
+    icon = Icons.bTNMortarTeam
+    w = TOOLTIP_WIDTH * name.length()
+
+    f = createFrame("MenuItemButton", humanRaceFrame, 0, c)
+    ..setAbsPoint(FRAMEPOINT_CENTER, v)
+    ..onClick() () ->
+        let i = GetTriggerPlayer().getId()
+        let p = Player(currentOwnerId[i])
+        for n = 1 to spawnCount[i]
+            createUnit(p, uID, spawnLoc[i], FACE)
+
+    getFrameByName("MenuItemButtonBackdrop", c).setTexture(icon, 0, true)
+    getFrameByName("MenuItemButtonPushedBackdrop", c).setTexture(icon, 0, true)
+
+    tool = createFrame("BoxedText", f, 0, c)
+    ..setAbsPoint(FRAMEPOINT_TOPLEFT, v.x + TOOLTIP_X_OFFSET, v.y + TOOLTIP_Y_OFFSET)
+    ..setSize(w, TOOLTIP_HEIGHT)
+    getFrameByName("BoxedTextTitle", c).setText(name)
+
+    f.setTooltip(tool)
+
+    // Steam Engine
+    
+    c = 0
+    v = C4
+    uID = UnitIds.siegeengine
+    name = "Siege Engine"
+    icon = Icons.bTNSeigeEngine
+    w = TOOLTIP_WIDTH * name.length()
+
+    f = createFrame("MenuItemButton", humanRaceFrame, 0, c)
+    ..setAbsPoint(FRAMEPOINT_CENTER, v)
+    ..onClick() () ->
+        let i = GetTriggerPlayer().getId()
+        let p = Player(currentOwnerId[i])
+        for n = 1 to spawnCount[i]
+            createUnit(p, uID, spawnLoc[i], FACE)
+
+    getFrameByName("MenuItemButtonBackdrop", c).setTexture(icon, 0, true)
+    getFrameByName("MenuItemButtonPushedBackdrop", c).setTexture(icon, 0, true)
+
+    tool = createFrame("BoxedText", f, 0, c)
+    ..setAbsPoint(FRAMEPOINT_TOPLEFT, v.x + TOOLTIP_X_OFFSET, v.y + TOOLTIP_Y_OFFSET)
+    ..setSize(w, TOOLTIP_HEIGHT)
+    getFrameByName("BoxedTextTitle", c).setText(name)
+
+    f.setTooltip(tool)
+
+    // Dragonhawk Rier
+    
+    c = 0
+    v = D4
+    uID = UnitIds.dragonhawk
+    name = "Dragonhawk Rier"
+    icon = Icons.bTNDragonHawk
+    w = TOOLTIP_WIDTH * name.length()
+
+    f = createFrame("MenuItemButton", humanRaceFrame, 0, c)
+    ..setAbsPoint(FRAMEPOINT_CENTER, v)
+    ..onClick() () ->
+        let i = GetTriggerPlayer().getId()
+        let p = Player(currentOwnerId[i])
+        for n = 1 to spawnCount[i]
+            createUnit(p, uID, spawnLoc[i], FACE)
+
+    getFrameByName("MenuItemButtonBackdrop", c).setTexture(icon, 0, true)
+    getFrameByName("MenuItemButtonPushedBackdrop", c).setTexture(icon, 0, true)
+
+    tool = createFrame("BoxedText", f, 0, c)
+    ..setAbsPoint(FRAMEPOINT_TOPLEFT, v.x + TOOLTIP_X_OFFSET, v.y + TOOLTIP_Y_OFFSET)
+    ..setSize(w, TOOLTIP_HEIGHT)
+    getFrameByName("BoxedTextTitle", c).setText(name)
+
+    f.setTooltip(tool)
+
+    // Gryphon Rier
+
+    c = 0
+    v = E4
+    uID = UnitIds.gryphonrider
+    name = "Gryphon Rier"
+    icon = Icons.bTNGryphonRider
+    w = TOOLTIP_WIDTH * name.length()
+
+    f = createFrame("MenuItemButton", humanRaceFrame, 0, c)
+    ..setAbsPoint(FRAMEPOINT_CENTER, v)
+    ..onClick() () ->
+        let i = GetTriggerPlayer().getId()
+        let p = Player(currentOwnerId[i])
+        for n = 1 to spawnCount[i]
+            createUnit(p, uID, spawnLoc[i], FACE)
+
+    getFrameByName("MenuItemButtonBackdrop", c).setTexture(icon, 0, true)
+    getFrameByName("MenuItemButtonPushedBackdrop", c).setTexture(icon, 0, true)
+
+    tool = createFrame("BoxedText", f, 0, c)
+    ..setAbsPoint(FRAMEPOINT_TOPLEFT, v.x + TOOLTIP_X_OFFSET, v.y + TOOLTIP_Y_OFFSET)
+    ..setSize(w, TOOLTIP_HEIGHT)
+    getFrameByName("BoxedTextTitle", c).setText(name)
+
+    f.setTooltip(tool)
+
+    // Water Elemental 1
+
+    c = 0
+    v = C5
+    uID = UnitIds.waterelemental1
+    name = "Water Elemental (Level 1)"
+    icon = Icons.bTNSummonWaterElemental
+    w = TOOLTIP_WIDTH * name.length()
+
+    f = createFrame("MenuItemButton", humanRaceFrame, 0, c)
+    ..setAbsPoint(FRAMEPOINT_CENTER, v)
+    ..onClick() () ->
+        let i = GetTriggerPlayer().getId()
+        let p = Player(currentOwnerId[i])
+        for n = 1 to spawnCount[i]
+            createUnit(p, uID, spawnLoc[i], FACE)
+
+    getFrameByName("MenuItemButtonBackdrop", c).setTexture(icon, 0, true)
+    getFrameByName("MenuItemButtonPushedBackdrop", c).setTexture(icon, 0, true)
+
+    tool = createFrame("BoxedText", f, 0, c)
+    ..setAbsPoint(FRAMEPOINT_TOPLEFT, v.x + TOOLTIP_X_OFFSET, v.y + TOOLTIP_Y_OFFSET)
+    ..setSize(w, TOOLTIP_HEIGHT)
+    getFrameByName("BoxedTextTitle", c).setText(name)
+
+    f.setTooltip(tool)
+
+    // Water Elemental 2
+
+    c = 0
+    v = D5
+    uID = UnitIds.waterelemental2
+    name = "Water Elemental (Level 2)"
+    icon = Icons.bTNSummonWaterElemental
+    w = TOOLTIP_WIDTH * name.length()
+
+    f = createFrame("MenuItemButton", humanRaceFrame, 0, c)
+    ..setAbsPoint(FRAMEPOINT_CENTER, v)
+    ..onClick() () ->
+        let i = GetTriggerPlayer().getId()
+        let p = Player(currentOwnerId[i])
+        for n = 1 to spawnCount[i]
+            createUnit(p, uID, spawnLoc[i], FACE)
+
+    getFrameByName("MenuItemButtonBackdrop", c).setTexture(icon, 0, true)
+    getFrameByName("MenuItemButtonPushedBackdrop", c).setTexture(icon, 0, true)
+
+    tool = createFrame("BoxedText", f, 0, c)
+    ..setAbsPoint(FRAMEPOINT_TOPLEFT, v.x + TOOLTIP_X_OFFSET, v.y + TOOLTIP_Y_OFFSET)
+    ..setSize(w, TOOLTIP_HEIGHT)
+    getFrameByName("BoxedTextTitle", c).setText(name)
+
+    f.setTooltip(tool)
+
+    // Water Elemental 3
+
+    c = 0
+    v = E5
+    uID = UnitIds.waterelemental3
+    name = "Water Elemental (Level 3)"
+    icon = Icons.bTNSummonWaterElemental
+    w = TOOLTIP_WIDTH * name.length()
+
+    f = createFrame("MenuItemButton", humanRaceFrame, 0, c)
+    ..setAbsPoint(FRAMEPOINT_CENTER, v)
+    ..onClick() () ->
+        let i = GetTriggerPlayer().getId()
+        let p = Player(currentOwnerId[i])
+        for n = 1 to spawnCount[i]
+            createUnit(p, uID, spawnLoc[i], FACE)
+
+    getFrameByName("MenuItemButtonBackdrop", c).setTexture(icon, 0, true)
+    getFrameByName("MenuItemButtonPushedBackdrop", c).setTexture(icon, 0, true)
+
+    tool = createFrame("BoxedText", f, 0, c)
+    ..setAbsPoint(FRAMEPOINT_TOPLEFT, v.x + TOOLTIP_X_OFFSET, v.y + TOOLTIP_Y_OFFSET)
+    ..setSize(w, TOOLTIP_HEIGHT)
+    getFrameByName("BoxedTextTitle", c).setText(name)
+
+    f.setTooltip(tool)
+
+
+
+    /* ******************************************************************************************************************************
+    *********************************************************************************************************************************
+    
+    BUILDINGS
+
+    *********************************************************************************************************************************
+    ****************************************************************************************************************************** */
+
+    // Town Hall
+
+    c = 0
+    v = I1
+    uID = UnitIds.townhall
+    name = "Town Hall"
+    icon = Icons.bTNTownHall
+    w = TOOLTIP_WIDTH * name.length()
+
+    f = createFrame("MenuItemButton", humanRaceFrame, 0, c)
+    ..setAbsPoint(FRAMEPOINT_CENTER, v)
+    ..onClick() () ->
+        let i = GetTriggerPlayer().getId()
+        let p = Player(currentOwnerId[i])
+        for n = 1 to spawnCount[i]
+            createUnit(p, uID, spawnLoc[i], FACE)
+
+    getFrameByName("MenuItemButtonBackdrop", c).setTexture(icon, 0, true)
+    getFrameByName("MenuItemButtonPushedBackdrop", c).setTexture(icon, 0, true)
+
+    tool = createFrame("BoxedText", f, 0, c)
+    ..setAbsPoint(FRAMEPOINT_TOPLEFT, v.x + TOOLTIP_X_OFFSET, v.y + TOOLTIP_Y_OFFSET)
+    ..setSize(w, TOOLTIP_HEIGHT)
+    getFrameByName("BoxedTextTitle", c).setText(name)
+
+    f.setTooltip(tool)
+
+    // Farm
+
+    c = 0
+    v = J1
+    uID = UnitIds.farm
+    name = "Farm"
+    icon = Icons.bTNFarm
+    w = TOOLTIP_WIDTH * name.length()
+
+    f = createFrame("MenuItemButton", humanRaceFrame, 0, c)
+    ..setAbsPoint(FRAMEPOINT_CENTER, v)
+    ..onClick() () ->
+        let i = GetTriggerPlayer().getId()
+        let p = Player(currentOwnerId[i])
+        for n = 1 to spawnCount[i]
+            createUnit(p, uID, spawnLoc[i], FACE)
+
+    getFrameByName("MenuItemButtonBackdrop", c).setTexture(icon, 0, true)
+    getFrameByName("MenuItemButtonPushedBackdrop", c).setTexture(icon, 0, true)
+
+    tool = createFrame("BoxedText", f, 0, c)
+    ..setAbsPoint(FRAMEPOINT_TOPLEFT, v.x + TOOLTIP_X_OFFSET, v.y + TOOLTIP_Y_OFFSET)
+    ..setSize(w, TOOLTIP_HEIGHT)
+    getFrameByName("BoxedTextTitle", c).setText(name)
+
+    f.setTooltip(tool)
+
+    // Barracks
+
+    c = 0
+    v = K1
+    uID = UnitIds.humanbarracks
+    name = "Barracks"
+    icon = Icons.bTNHumanBarracks
+    w = TOOLTIP_WIDTH * name.length()
+
+    f = createFrame("MenuItemButton", humanRaceFrame, 0, c)
+    ..setAbsPoint(FRAMEPOINT_CENTER, v)
+    ..onClick() () ->
+        let i = GetTriggerPlayer().getId()
+        let p = Player(currentOwnerId[i])
+        for n = 1 to spawnCount[i]
+            createUnit(p, uID, spawnLoc[i], FACE)
+
+    getFrameByName("MenuItemButtonBackdrop", c).setTexture(icon, 0, true)
+    getFrameByName("MenuItemButtonPushedBackdrop", c).setTexture(icon, 0, true)
+
+    tool = createFrame("BoxedText", f, 0, c)
+    ..setAbsPoint(FRAMEPOINT_TOPLEFT, v.x + TOOLTIP_X_OFFSET, v.y + TOOLTIP_Y_OFFSET)
+    ..setSize(w, TOOLTIP_HEIGHT)
+    getFrameByName("BoxedTextTitle", c).setText(name)
+
+    f.setTooltip(tool)
+
+    // Altar of Kings
+
+    c = 0
+    v = I2
+    uID = UnitIds.altarofkings
+    name = "Altar of Kings"
+    icon = Icons.bTNAltarOfKings
+    w = TOOLTIP_WIDTH * name.length()
+
+    f = createFrame("MenuItemButton", humanRaceFrame, 0, c)
+    ..setAbsPoint(FRAMEPOINT_CENTER, v)
+    ..onClick() () ->
+        let i = GetTriggerPlayer().getId()
+        let p = Player(currentOwnerId[i])
+        for n = 1 to spawnCount[i]
+            createUnit(p, uID, spawnLoc[i], FACE)
+
+    getFrameByName("MenuItemButtonBackdrop", c).setTexture(icon, 0, true)
+    getFrameByName("MenuItemButtonPushedBackdrop", c).setTexture(icon, 0, true)
+
+    tool = createFrame("BoxedText", f, 0, c)
+    ..setAbsPoint(FRAMEPOINT_TOPLEFT, v.x + TOOLTIP_X_OFFSET, v.y + TOOLTIP_Y_OFFSET)
+    ..setSize(w, TOOLTIP_HEIGHT)
+    getFrameByName("BoxedTextTitle", c).setText(name)
+
+    f.setTooltip(tool)
+
+    // Lumber Mill
+
+    c = 0
+    v = J2
+    uID = UnitIds.humanlumbermill
+    name = "Lumber Mill"
+    icon = Icons.bTNHumanLumberMill
+    w = TOOLTIP_WIDTH * name.length()
+
+    f = createFrame("MenuItemButton", humanRaceFrame, 0, c)
+    ..setAbsPoint(FRAMEPOINT_CENTER, v)
+    ..onClick() () ->
+        let i = GetTriggerPlayer().getId()
+        let p = Player(currentOwnerId[i])
+        for n = 1 to spawnCount[i]
+            createUnit(p, uID, spawnLoc[i], FACE)
+
+    getFrameByName("MenuItemButtonBackdrop", c).setTexture(icon, 0, true)
+    getFrameByName("MenuItemButtonPushedBackdrop", c).setTexture(icon, 0, true)
+
+    tool = createFrame("BoxedText", f, 0, c)
+    ..setAbsPoint(FRAMEPOINT_TOPLEFT, v.x + TOOLTIP_X_OFFSET, v.y + TOOLTIP_Y_OFFSET)
+    ..setSize(w, TOOLTIP_HEIGHT)
+    getFrameByName("BoxedTextTitle", c).setText(name)
+
+    f.setTooltip(tool)
+
+    // Blacksmith
+
+    c = 0
+    v = K2
+    uID = UnitIds.blacksmith
+    name = "Blacksmith"
+    icon = Icons.bTNBlacksmith
+    w = TOOLTIP_WIDTH * name.length()
+
+    f = createFrame("MenuItemButton", humanRaceFrame, 0, c)
+    ..setAbsPoint(FRAMEPOINT_CENTER, v)
+    ..onClick() () ->
+        let i = GetTriggerPlayer().getId()
+        let p = Player(currentOwnerId[i])
+        for n = 1 to spawnCount[i]
+            createUnit(p, uID, spawnLoc[i], FACE)
+
+    getFrameByName("MenuItemButtonBackdrop", c).setTexture(icon, 0, true)
+    getFrameByName("MenuItemButtonPushedBackdrop", c).setTexture(icon, 0, true)
+
+    tool = createFrame("BoxedText", f, 0, c)
+    ..setAbsPoint(FRAMEPOINT_TOPLEFT, v.x + TOOLTIP_X_OFFSET, v.y + TOOLTIP_Y_OFFSET)
+    ..setSize(w, TOOLTIP_HEIGHT)
+    getFrameByName("BoxedTextTitle", c).setText(name)
+
+    f.setTooltip(tool)
+
+    // Keep
+
+    c = 0
+    v = I3
+    uID = UnitIds.keep
+    name = "Keep"
+    icon = Icons.bTNKeep
+    w = TOOLTIP_WIDTH * name.length()
+
+    f = createFrame("MenuItemButton", humanRaceFrame, 0, c)
+    ..setAbsPoint(FRAMEPOINT_CENTER, v)
+    ..onClick() () ->
+        let i = GetTriggerPlayer().getId()
+        let p = Player(currentOwnerId[i])
+        for n = 1 to spawnCount[i]
+            createUnit(p, uID, spawnLoc[i], FACE)
+
+    getFrameByName("MenuItemButtonBackdrop", c).setTexture(icon, 0, true)
+    getFrameByName("MenuItemButtonPushedBackdrop", c).setTexture(icon, 0, true)
+
+    tool = createFrame("BoxedText", f, 0, c)
+    ..setAbsPoint(FRAMEPOINT_TOPLEFT, v.x + TOOLTIP_X_OFFSET, v.y + TOOLTIP_Y_OFFSET)
+    ..setSize(w, TOOLTIP_HEIGHT)
+    getFrameByName("BoxedTextTitle", c).setText(name)
+
+    f.setTooltip(tool)
+
+    // Workshop
+
+    c = 0
+    v = J3
+    uID = UnitIds.workshop
+    name = "Workshop"
+    icon = Icons.bTNWorkshop
+    w = TOOLTIP_WIDTH * name.length()
+
+    f = createFrame("MenuItemButton", humanRaceFrame, 0, c)
+    ..setAbsPoint(FRAMEPOINT_CENTER, v)
+    ..onClick() () ->
+        let i = GetTriggerPlayer().getId()
+        let p = Player(currentOwnerId[i])
+        for n = 1 to spawnCount[i]
+            createUnit(p, uID, spawnLoc[i], FACE)
+
+    getFrameByName("MenuItemButtonBackdrop", c).setTexture(icon, 0, true)
+    getFrameByName("MenuItemButtonPushedBackdrop", c).setTexture(icon, 0, true)
+
+    tool = createFrame("BoxedText", f, 0, c)
+    ..setAbsPoint(FRAMEPOINT_TOPLEFT, v.x + TOOLTIP_X_OFFSET, v.y + TOOLTIP_Y_OFFSET)
+    ..setSize(w, TOOLTIP_HEIGHT)
+    getFrameByName("BoxedTextTitle", c).setText(name)
+
+    f.setTooltip(tool)
+
+    // Gryphon Aviary
+
+    c = 0
+    v = K3
+    uID = UnitIds.gryphonaviary
+    name = "Gryphon Aviary"
+    icon = Icons.bTNGryphonAviary
+    w = TOOLTIP_WIDTH * name.length()
+
+    f = createFrame("MenuItemButton", humanRaceFrame, 0, c)
+    ..setAbsPoint(FRAMEPOINT_CENTER, v)
+    ..onClick() () ->
+        let i = GetTriggerPlayer().getId()
+        let p = Player(currentOwnerId[i])
+        for n = 1 to spawnCount[i]
+            createUnit(p, uID, spawnLoc[i], FACE)
+
+    getFrameByName("MenuItemButtonBackdrop", c).setTexture(icon, 0, true)
+    getFrameByName("MenuItemButtonPushedBackdrop", c).setTexture(icon, 0, true)
+
+    tool = createFrame("BoxedText", f, 0, c)
+    ..setAbsPoint(FRAMEPOINT_TOPLEFT, v.x + TOOLTIP_X_OFFSET, v.y + TOOLTIP_Y_OFFSET)
+    ..setSize(w, TOOLTIP_HEIGHT)
+    getFrameByName("BoxedTextTitle", c).setText(name)
+
+    f.setTooltip(tool)
+
+    // Castle
+    
+    c = 0
+    v = I4
+    uID = UnitIds.castle
+    name = "Castle"
+    icon = Icons.bTNCastle
+    w = TOOLTIP_WIDTH * name.length()
+
+    f = createFrame("MenuItemButton", humanRaceFrame, 0, c)
+    ..setAbsPoint(FRAMEPOINT_CENTER, v)
+    ..onClick() () ->
+        let i = GetTriggerPlayer().getId()
+        let p = Player(currentOwnerId[i])
+        for n = 1 to spawnCount[i]
+            createUnit(p, uID, spawnLoc[i], FACE)
+
+    getFrameByName("MenuItemButtonBackdrop", c).setTexture(icon, 0, true)
+    getFrameByName("MenuItemButtonPushedBackdrop", c).setTexture(icon, 0, true)
+
+    tool = createFrame("BoxedText", f, 0, c)
+    ..setAbsPoint(FRAMEPOINT_TOPLEFT, v.x + TOOLTIP_X_OFFSET, v.y + TOOLTIP_Y_OFFSET)
+    ..setSize(w, TOOLTIP_HEIGHT)
+    getFrameByName("BoxedTextTitle", c).setText(name)
+
+    f.setTooltip(tool)
+
+    // Arcane Vault
+
+    c = 0
+    v = J4
+    uID = UnitIds.arcanevault
+    name = "Arcane Vault"
+    icon = Icons.bTNArcaneVault
+    w = TOOLTIP_WIDTH * name.length()
+
+    f = createFrame("MenuItemButton", humanRaceFrame, 0, c)
+    ..setAbsPoint(FRAMEPOINT_CENTER, v)
+    ..onClick() () ->
+        let i = GetTriggerPlayer().getId()
+        let p = Player(currentOwnerId[i])
+        for n = 1 to spawnCount[i]
+            createUnit(p, uID, spawnLoc[i], FACE)
+
+    getFrameByName("MenuItemButtonBackdrop", c).setTexture(icon, 0, true)
+    getFrameByName("MenuItemButtonPushedBackdrop", c).setTexture(icon, 0, true)
+
+    tool = createFrame("BoxedText", f, 0, c)
+    ..setAbsPoint(FRAMEPOINT_TOPLEFT, v.x + TOOLTIP_X_OFFSET, v.y + TOOLTIP_Y_OFFSET)
+    ..setSize(w, TOOLTIP_HEIGHT)
+    getFrameByName("BoxedTextTitle", c).setText(name)
+
+    f.setTooltip(tool)
+
+    // Scout Tower
+
+    c = 0
+    v = K4
+    uID = UnitIds.scouttower
+    name = "Scout Tower"
+    icon = Icons.bTNHumanWatchTower
+    w = TOOLTIP_WIDTH * name.length()
+
+    f = createFrame("MenuItemButton", humanRaceFrame, 0, c)
+    ..setAbsPoint(FRAMEPOINT_CENTER, v)
+    ..onClick() () ->
+        let i = GetTriggerPlayer().getId()
+        let p = Player(currentOwnerId[i])
+        for n = 1 to spawnCount[i]
+            createUnit(p, uID, spawnLoc[i], FACE)
+
+    getFrameByName("MenuItemButtonBackdrop", c).setTexture(icon, 0, true)
+    getFrameByName("MenuItemButtonPushedBackdrop", c).setTexture(icon, 0, true)
+
+    tool = createFrame("BoxedText", f, 0, c)
+    ..setAbsPoint(FRAMEPOINT_TOPLEFT, v.x + TOOLTIP_X_OFFSET, v.y + TOOLTIP_Y_OFFSET)
+    ..setSize(w, TOOLTIP_HEIGHT)
+    getFrameByName("BoxedTextTitle", c).setText(name)
+
+    f.setTooltip(tool)
+
+    // Guard Tower
+
+    c = 0
+    v = I5
+    uID = UnitIds.guardtower
+    name = "Guard Tower"
+    icon = Icons.bTNGuardTower
+    w = TOOLTIP_WIDTH * name.length()
+
+    f = createFrame("MenuItemButton", humanRaceFrame, 0, c)
+    ..setAbsPoint(FRAMEPOINT_CENTER, v)
+    ..onClick() () ->
+        let i = GetTriggerPlayer().getId()
+        let p = Player(currentOwnerId[i])
+        for n = 1 to spawnCount[i]
+            createUnit(p, uID, spawnLoc[i], FACE)
+
+    getFrameByName("MenuItemButtonBackdrop", c).setTexture(icon, 0, true)
+    getFrameByName("MenuItemButtonPushedBackdrop", c).setTexture(icon, 0, true)
+
+    tool = createFrame("BoxedText", f, 0, c)
+    ..setAbsPoint(FRAMEPOINT_TOPLEFT, v.x + TOOLTIP_X_OFFSET, v.y + TOOLTIP_Y_OFFSET)
+    ..setSize(w, TOOLTIP_HEIGHT)
+    getFrameByName("BoxedTextTitle", c).setText(name)
+
+    f.setTooltip(tool)
+
+    // Arcane Tower
+
+    c = 0
+    v = J5
+    uID = UnitIds.humanarcanetower
+    name = "Arcane Tower"
+    icon = Icons.bTNHumanArcaneTower
+    w = TOOLTIP_WIDTH * name.length()
+
+    f = createFrame("MenuItemButton", humanRaceFrame, 0, c)
+    ..setAbsPoint(FRAMEPOINT_CENTER, v)
+    ..onClick() () ->
+        let i = GetTriggerPlayer().getId()
+        let p = Player(currentOwnerId[i])
+        for n = 1 to spawnCount[i]
+            createUnit(p, uID, spawnLoc[i], FACE)
+
+    getFrameByName("MenuItemButtonBackdrop", c).setTexture(icon, 0, true)
+    getFrameByName("MenuItemButtonPushedBackdrop", c).setTexture(icon, 0, true)
+
+    tool = createFrame("BoxedText", f, 0, c)
+    ..setAbsPoint(FRAMEPOINT_TOPLEFT, v.x + TOOLTIP_X_OFFSET, v.y + TOOLTIP_Y_OFFSET)
+    ..setSize(w, TOOLTIP_HEIGHT)
+    getFrameByName("BoxedTextTitle", c).setText(name)
+
+    f.setTooltip(tool)
+
+    // Cannon Tower
+
+    c = 0
+    v = K5
+    uID = UnitIds.cannontower
+    name = "Cannon Tower"
+    icon = Icons.bTNCannonTower
+    w = TOOLTIP_WIDTH * name.length()
+
+    f = createFrame("MenuItemButton", humanRaceFrame, 0, c)
+    ..setAbsPoint(FRAMEPOINT_CENTER, v)
+    ..onClick() () ->
+        let i = GetTriggerPlayer().getId()
+        let p = Player(currentOwnerId[i])
+        for n = 1 to spawnCount[i]
+            createUnit(p, uID, spawnLoc[i], FACE)
+
+    getFrameByName("MenuItemButtonBackdrop", c).setTexture(icon, 0, true)
+    getFrameByName("MenuItemButtonPushedBackdrop", c).setTexture(icon, 0, true)
+
+    tool = createFrame("BoxedText", f, 0, c)
+    ..setAbsPoint(FRAMEPOINT_TOPLEFT, v.x + TOOLTIP_X_OFFSET, v.y + TOOLTIP_Y_OFFSET)
+    ..setSize(w, TOOLTIP_HEIGHT)
+    getFrameByName("BoxedTextTitle", c).setText(name)
+
+    f.setTooltip(tool)
+
+
+
+    /* ******************************************************************************************************************************
+    *********************************************************************************************************************************
+    
+    HEROES
+
+    *********************************************************************************************************************************
+    ****************************************************************************************************************************** */
+
+    // Paladin
+    
+    c = 0
+    v = O1
+    uID = UnitIds.paladin
+    name = "Paladin"
+    icon = Icons.bTNHeroPaladin
+    w = TOOLTIP_WIDTH * name.length()
+
+    f = createFrame("MenuItemButton", humanRaceFrame, 0, c)
+    ..setAbsPoint(FRAMEPOINT_CENTER, v)
+    ..onClick() () ->
+        let i = GetTriggerPlayer().getId()
+        let p = Player(currentOwnerId[i])
+        for n = 1 to spawnCount[i]
+            createUnit(p, uID, spawnLoc[i], FACE)
+
+    getFrameByName("MenuItemButtonBackdrop", c).setTexture(icon, 0, true)
+    getFrameByName("MenuItemButtonPushedBackdrop", c).setTexture(icon, 0, true)
+
+    tool = createFrame("BoxedText", f, 0, c)
+    ..setAbsPoint(FRAMEPOINT_TOPLEFT, v.x + TOOLTIP_X_OFFSET, v.y + TOOLTIP_Y_OFFSET)
+    ..setSize(w, TOOLTIP_HEIGHT)
+    getFrameByName("BoxedTextTitle", c).setText(name)
+
+    f.setTooltip(tool)
+
+    // Archmage
+    
+    c = 0
+    v = P1
+    uID = UnitIds.archmage
+    name = "Archmage"
+    icon = Icons.bTNHeroArchMage
+    w = TOOLTIP_WIDTH * name.length()
+
+    f = createFrame("MenuItemButton", humanRaceFrame, 0, c)
+    ..setAbsPoint(FRAMEPOINT_CENTER, v)
+    ..onClick() () ->
+        let i = GetTriggerPlayer().getId()
+        let p = Player(currentOwnerId[i])
+        for n = 1 to spawnCount[i]
+            createUnit(p, uID, spawnLoc[i], FACE)
+
+    getFrameByName("MenuItemButtonBackdrop", c).setTexture(icon, 0, true)
+    getFrameByName("MenuItemButtonPushedBackdrop", c).setTexture(icon, 0, true)
+
+    tool = createFrame("BoxedText", f, 0, c)
+    ..setAbsPoint(FRAMEPOINT_TOPLEFT, v.x + TOOLTIP_X_OFFSET, v.y + TOOLTIP_Y_OFFSET)
+    ..setSize(w, TOOLTIP_HEIGHT)
+    getFrameByName("BoxedTextTitle", c).setText(name)
+
+    f.setTooltip(tool)
+
+    // Mountain King
+    
+    c = 0
+    v = Q1
+    uID = UnitIds.mountainking
+    name = "Mountain King"
+    icon = Icons.bTNHeroMountainKing
+    w = TOOLTIP_WIDTH * name.length()
+
+    f = createFrame("MenuItemButton", humanRaceFrame, 0, c)
+    ..setAbsPoint(FRAMEPOINT_CENTER, v)
+    ..onClick() () ->
+        let i = GetTriggerPlayer().getId()
+        let p = Player(currentOwnerId[i])
+        for n = 1 to spawnCount[i]
+            createUnit(p, uID, spawnLoc[i], FACE)
+
+    getFrameByName("MenuItemButtonBackdrop", c).setTexture(icon, 0, true)
+    getFrameByName("MenuItemButtonPushedBackdrop", c).setTexture(icon, 0, true)
+
+    tool = createFrame("BoxedText", f, 0, c)
+    ..setAbsPoint(FRAMEPOINT_TOPLEFT, v.x + TOOLTIP_X_OFFSET, v.y + TOOLTIP_Y_OFFSET)
+    ..setSize(w, TOOLTIP_HEIGHT)
+    getFrameByName("BoxedTextTitle", c).setText(name)
+
+    f.setTooltip(tool)
+
+    // Blood Mage
+    
+    c = 0
+    v = O2
+    uID = UnitIds.bloodmage
+    name = "Blood Mage"
+    icon = Icons.bTNHeroBloodElfPrince
+    w = TOOLTIP_WIDTH * name.length()
+
+    f = createFrame("MenuItemButton", humanRaceFrame, 0, c)
+    ..setAbsPoint(FRAMEPOINT_CENTER, v)
+    ..onClick() () ->
+        let i = GetTriggerPlayer().getId()
+        let p = Player(currentOwnerId[i])
+        for n = 1 to spawnCount[i]
+            createUnit(p, uID, spawnLoc[i], FACE)
+
+    getFrameByName("MenuItemButtonBackdrop", c).setTexture(icon, 0, true)
+    getFrameByName("MenuItemButtonPushedBackdrop", c).setTexture(icon, 0, true)
+
+    tool = createFrame("BoxedText", f, 0, c)
+    ..setAbsPoint(FRAMEPOINT_TOPLEFT, v.x + TOOLTIP_X_OFFSET, v.y + TOOLTIP_Y_OFFSET)
+    ..setSize(w, TOOLTIP_HEIGHT)
+    getFrameByName("BoxedTextTitle", c).setText(name)
+
+    f.setTooltip(tool)
+
+    humanRaceFrame.setVisible(false)

@@ -1,0 +1,158 @@
+package UIGrid
+
+constant real colSize = 0.0421
+constant real rowSize = -0.0421
+
+// start from the middle
+constant real col10 = .8 * .5
+
+// subtract from middle column to obtain position of columns on the left
+constant real col9 = col10 - colSize
+constant real col8 = col9 - colSize
+constant real col7 = col8 - colSize
+constant real col6 = col7 - colSize
+constant real col5 = col6 - colSize
+constant real col4 = col5 - colSize
+constant real col3 = col4 - colSize
+constant real col2 = col3 - colSize
+constant real col1 = col2 - colSize
+
+// add from middle column to obtain position of columns on the right
+constant real col11 = col10 + colSize
+constant real col12 = col11 + colSize
+constant real col13 = col12 + colSize
+constant real col14 = col13 + colSize
+constant real col15 = col14 + colSize
+constant real col16 = col15 + colSize
+constant real col17 = col16 + colSize
+constant real col18 = col17 + colSize
+constant real col19 = col18 + colSize
+
+constant real row1 = .45
+constant real row2 = row1 + rowSize
+constant real row3 = row2 + rowSize
+constant real row4 = row3 + rowSize
+constant real row5 = row4 + rowSize
+
+public constant real TOOLTIP_WIDTH = 0.0075
+public constant real TOOLTIP_HEIGHT = 0.02
+public constant real TOOLTIP_X_OFFSET = 0.02
+public constant real TOOLTIP_Y_OFFSET = 0.016
+
+public constant real BUTTON_OFFSET = -.0515
+public constant real CATEGORY_OFFSET = .0385
+public constant real TITLE_OFFSET = CATEGORY_OFFSET + .025
+
+public constant vec2 A1 = vec2(col1, row1)
+public constant vec2 A2 = vec2(col1, row2)
+public constant vec2 A3 = vec2(col1, row3)
+public constant vec2 A4 = vec2(col1, row4)
+public constant vec2 A5 = vec2(col1, row5)
+
+public constant vec2 B1 = vec2(col2, row1)
+public constant vec2 B2 = vec2(col2, row2)
+public constant vec2 B3 = vec2(col2, row3)
+public constant vec2 B4 = vec2(col2, row4)
+public constant vec2 B5 = vec2(col2, row5)
+
+public constant vec2 C1 = vec2(col3, row1)
+public constant vec2 C2 = vec2(col3, row2)
+public constant vec2 C3 = vec2(col3, row3)
+public constant vec2 C4 = vec2(col3, row4)
+public constant vec2 C5 = vec2(col3, row5)
+
+public constant vec2 D1 = vec2(col4, row1)
+public constant vec2 D2 = vec2(col4, row2)
+public constant vec2 D3 = vec2(col4, row3)
+public constant vec2 D4 = vec2(col4, row4)
+public constant vec2 D5 = vec2(col4, row5)
+
+public constant vec2 E1 = vec2(col5, row1)
+public constant vec2 E2 = vec2(col5, row2)
+public constant vec2 E3 = vec2(col5, row3)
+public constant vec2 E4 = vec2(col5, row4)
+public constant vec2 E5 = vec2(col5, row5)
+
+public constant vec2 F1 = vec2(col6, row1)
+public constant vec2 F2 = vec2(col6, row2)
+public constant vec2 F3 = vec2(col6, row3)
+public constant vec2 F4 = vec2(col6, row4)
+public constant vec2 F5 = vec2(col6, row5)
+
+public constant vec2 G1 = vec2(col7, row1)
+public constant vec2 G2 = vec2(col7, row2)
+public constant vec2 G3 = vec2(col7, row3)
+public constant vec2 G4 = vec2(col7, row4)
+public constant vec2 G5 = vec2(col7, row5)
+
+public constant vec2 H1 = vec2(col8, row1)
+public constant vec2 H2 = vec2(col8, row2)
+public constant vec2 H3 = vec2(col8, row3)
+public constant vec2 H4 = vec2(col8, row4)
+public constant vec2 H5 = vec2(col8, row5)
+
+public constant vec2 I1 = vec2(col9, row1)
+public constant vec2 I2 = vec2(col9, row2)
+public constant vec2 I3 = vec2(col9, row3)
+public constant vec2 I4 = vec2(col9, row4)
+public constant vec2 I5 = vec2(col9, row5)
+
+public constant vec2 J1 = vec2(col10, row1)
+public constant vec2 J2 = vec2(col10, row2)
+public constant vec2 J3 = vec2(col10, row3)
+public constant vec2 J4 = vec2(col10, row4)
+public constant vec2 J5 = vec2(col10, row5)
+
+public constant vec2 K1 = vec2(col11, row1)
+public constant vec2 K2 = vec2(col11, row2)
+public constant vec2 K3 = vec2(col11, row3)
+public constant vec2 K4 = vec2(col11, row4)
+public constant vec2 K5 = vec2(col11, row5)
+
+public constant vec2 L1 = vec2(col12, row1)
+public constant vec2 L2 = vec2(col12, row2)
+public constant vec2 L3 = vec2(col12, row3)
+public constant vec2 L4 = vec2(col12, row4)
+public constant vec2 L5 = vec2(col12, row5)
+
+public constant vec2 M1 = vec2(col13, row1)
+public constant vec2 M2 = vec2(col13, row2)
+public constant vec2 M3 = vec2(col13, row3)
+public constant vec2 M4 = vec2(col13, row4)
+public constant vec2 M5 = vec2(col13, row5)
+
+public constant vec2 N1 = vec2(col14, row1)
+public constant vec2 N2 = vec2(col14, row2)
+public constant vec2 N3 = vec2(col14, row3)
+public constant vec2 N4 = vec2(col14, row4)
+public constant vec2 N5 = vec2(col14, row5)
+
+public constant vec2 O1 = vec2(col15, row1)
+public constant vec2 O2 = vec2(col15, row2)
+public constant vec2 O3 = vec2(col15, row3)
+public constant vec2 O4 = vec2(col15, row4)
+public constant vec2 O5 = vec2(col15, row5)
+
+public constant vec2 P1 = vec2(col16, row1)
+public constant vec2 P2 = vec2(col16, row2)
+public constant vec2 P3 = vec2(col16, row3)
+public constant vec2 P4 = vec2(col16, row4)
+public constant vec2 P5 = vec2(col16, row5)
+
+public constant vec2 Q1 = vec2(col17, row1)
+public constant vec2 Q2 = vec2(col17, row2)
+public constant vec2 Q3 = vec2(col17, row3)
+public constant vec2 Q4 = vec2(col17, row4)
+public constant vec2 Q5 = vec2(col17, row5)
+
+public constant vec2 R1 = vec2(col18, row1)
+public constant vec2 R2 = vec2(col18, row2)
+public constant vec2 R3 = vec2(col18, row3)
+public constant vec2 R4 = vec2(col18, row4)
+public constant vec2 R5 = vec2(col18, row5)
+
+public constant vec2 S1 = vec2(col19, row1)
+public constant vec2 S2 = vec2(col19, row2)
+public constant vec2 S3 = vec2(col19, row3)
+public constant vec2 S4 = vec2(col19, row4)
+public constant vec2 S5 = vec2(col19, row5)

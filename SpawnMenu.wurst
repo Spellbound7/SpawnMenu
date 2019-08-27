@@ -1,0 +1,259 @@
+package SpawnMenu
+
+import Objects
+import Abilities
+import EventHelper
+import FactionMenus
+
+public framehandle cheatMenuFrame
+framehandle cheatMenuButton
+framehandle spawnPointButton
+framehandle amountSlider
+framehandle amountIndicator
+framehandle playerSlider
+framehandle playerIndicator
+
+constant real Y_OFFSET = .065
+constant real MENU_TITLE_Y = .5
+constant real TITLE_Y = MENU_TITLE_Y - .035
+constant real SUBTITLE_Y = TITLE_Y - .015
+
+boolean array isRevealed
+boolean array isOpen
+boolean array isSettingPoint
+boolean array reopenMenu
+trigger array spawnTracker
+trigger array spawnTrackerClick
+effect array spawnerFx // the effect that follows your mouse
+effect array spawnPointFx // the effect that indicates your set spawn point
+
+public vec2 array spawnLoc
+public integer array spawnCount
+public int array currentOwnerId
+public framehandle array activeFrame
+
+function closeMenu(player p)
+	let i = GetPlayerId(p)
+	cheatMenuFrame.setVisibleFor(p, false)
+	isOpen[i] = false
+
+function onEsc()
+	let i = GetTriggerPlayer().getId()
+
+	if isSettingPoint[i]
+		endSpawnPointSet(i)
+	if isOpen[i]
+		closeMenu(GetTriggerPlayer())
+
+function endSpawnPointSet(int i)
+	spawnTracker[i].destr()
+	spawnTrackerClick[i].destr()
+	spawnerFx[i]..setPos(vec3(0.,0.,-1000.))..destr()
+	spawnTracker[i] = null
+	spawnTrackerClick[i] = null
+	spawnerFx[i] = null
+	isSettingPoint[i] = false
+	reopenMenu[i] = false
+
+function onMouseMove()
+	let i = GetTriggerPlayer().getId()
+	let loc = vec2(EventData.getPlayerMouseX(), EventData.getPlayerMouseY())
+	spawnerFx[i].setPos(vec3(loc.x, loc.y, loc.getTerrainZ()))
+
+function onMouseClick()
+	let p = GetTriggerPlayer()
+	let i = GetPlayerId(p)
+	spawnLoc[i] = vec2(EventData.getPlayerMouseX(), EventData.getPlayerMouseY())
+	if spawnPointFx[i] == null
+		spawnPointFx[i] = addEffect(Abilities.aneuCaster1, spawnLoc[i])
+		..setColorByPlayer(p)
+	else
+		spawnPointFx[i].setPos(vec3(spawnLoc[i].x, spawnLoc[i].y, spawnLoc[i].getTerrainZ()))
+
+	if reopenMenu[i]
+		cheatMenuFrame.setVisibleFor(p, true)
+		isOpen[i] = true
+
+	endSpawnPointSet(i)
+
+function onSetSpawn()
+	let p = GetTriggerPlayer()
+	let i = GetPlayerId(p)
+
+	if isRevealed[i]
+		if isOpen[i]
+			closeMenu(p)
+			reopenMenu[i] = true
+
+		if isSettingPoint[i]
+			endSpawnPointSet(i)
+
+		else
+			spawnTracker[i] = CreateTrigger()
+			..registerPlayerEvent(p, EVENT_PLAYER_MOUSE_MOVE)
+			..addAction(function onMouseMove)
+
+			spawnTrackerClick[i] = CreateTrigger()
+			..registerPlayerEvent(p, EVENT_PLAYER_MOUSE_DOWN)
+			..addAction(function onMouseClick)
+
+			if spawnerFx[i] == null
+				spawnerFx[i] = addEffect(Objects.startLocation, vec3(0.,0.,-1000.))
+				..setColorByPlayer(p)
+				..setScale(.25)
+
+			isSettingPoint[i] = true
+
+function callback()
+	let p = GetTriggerPlayer()
+	let i = GetPlayerId(p)
+
+	if isRevealed[i]
+		if isOpen[i]
+			closeMenu(p)
+		else
+			cheatMenuFrame.setVisibleFor(p, true)
+			isOpen[i] = true
+
+function onSliderChange()
+	let p = GetTriggerPlayer()
+	let i = GetPlayerId(p)
+	if p == GetLocalPlayer()
+		spawnCount[i] = BlzFrameGetValue(amountSlider).toInt()
+		getFrameByName("SliderAmountText", 0).setText(spawnCount[i].toString())
+
+function onPlayerSlider()
+	let p = GetTriggerPlayer()
+	let i = GetPlayerId(p)
+	if p == localPlayer
+		currentOwnerId[i] = BlzFrameGetValue(playerSlider).toInt()
+		getFrameByName("SliderAmountText", 1).setText(GetPlayerColor(Player(currentOwnerId[i])).toColor().toColorString() + "P" + (currentOwnerId[i] + 1).toString() + "|r")
+
+function initSpawnMenu()
+	loadTOCFile("UI/CustomUI.toc")
+
+	// the button that will open the frame
+	cheatMenuButton = createFrame("CheatMenuButton")
+	..setAbsPoint(FRAMEPOINT_BOTTOMLEFT, 0.2125, 0.14)
+	..setText("Spawn Menu |cffffcc00Y|r")
+	..setVisible(false)
+
+	// the button to set your spawn point
+	spawnPointButton = createFrame("CheatMenuButton")
+	..setAbsPoint(FRAMEPOINT_BOTTOMLEFT, 0.3, 0.14)
+	..setText("Set Spawn Loc |cffffcc00U|r")
+	..setVisible(false)
+
+	// the slider to control the number of units spawned
+	amountSlider = createFrame("EscMenuSliderTemplate")
+	..setWidth(.06)
+	..setAbsPoint(FRAMEPOINT_BOTTOMLEFT, .39, 0.145)
+	..minMax(1, 12)
+	..setStepSize(1)
+	..setValue(1)
+	..setVisible(false)
+
+	// numerical inidcator for the slider
+	amountIndicator = createFrame("SliderAmountFrame")
+	..setAbsPoint(FRAMEPOINT_BOTTOMLEFT, 0.456, 0.14)
+	..setVisible(false)
+
+	getFrameByName("SliderAmountText")
+	..setPoint(FRAMEPOINT_CENTER, amountIndicator, FRAMEPOINT_CENTER, -.0195, 0.)
+	..setText(BlzFrameGetValue(amountSlider).toInt().toString())
+
+	// the player slider
+	playerSlider = createFrame("EscMenuSliderTemplate", GAME_UI, 0, 1)
+	..setWidth(.06)
+	..setAbsPoint(FRAMEPOINT_BOTTOMLEFT, .485, 0.145)
+	..minMax(0, 25)//bj_MAX_PLAYER_SLOTS.toReal())
+	..setStepSize(1)
+	..setValue(0)
+	..setVisible(false)
+
+	// player indicator for the player slider
+	playerIndicator = createFrame("SliderAmountFrame", GAME_UI, 0, 1)
+	..setWidth(.025)
+	..setAbsPoint(FRAMEPOINT_BOTTOMLEFT, 0.551, 0.14)
+	..setVisible(false)
+
+	getFrameByName("SliderAmountText", 1)
+	..setPoint(FRAMEPOINT_CENTER, playerIndicator, FRAMEPOINT_CENTER, -.0195, 0.)
+	..setText(GetPlayerColor(Player(0)).toColor().toColorString() + "P" + (BlzFrameGetValue(playerSlider).toInt() + 1).toString() + "|r")
+
+	// the frame that shows the objects that you can spawn
+	cheatMenuFrame = createFrame("MenuBackdrop")
+	..setSize(.8, .3575)
+	..setAbsPoint(FRAMEPOINT_CENTER, 0.4, 0.3 + Y_OFFSET)
+	..setVisible(false)
+
+	CreateTrigger()
+	..registerFrameEvent(cheatMenuButton, FRAMEEVENT_CONTROL_CLICK)
+	..addAction(function callback)
+
+	CreateTrigger()
+	..registerFrameEvent(spawnPointButton, FRAMEEVENT_CONTROL_CLICK)
+	..addAction(function onSetSpawn)
+
+	CreateTrigger()
+	..registerFrameEvent(amountSlider, FRAMEEVENT_SLIDER_VALUE_CHANGED)
+	..addAction(function onSliderChange)
+
+	CreateTrigger()
+	..registerFrameEvent(playerSlider, FRAMEEVENT_SLIDER_VALUE_CHANGED)
+	..addAction(function onPlayerSlider)
+
+	initHumanMenu()
+	initOrcMenu()
+	initUndeadMenu()
+	initNightElfMenu()
+
+	let trig2 = CreateTrigger()
+	let trig3 = CreateTrigger()
+	let trig4 = CreateTrigger()
+	for i = 0 to bj_MAX_PLAYER_SLOTS
+		trig2.registerPlayerKeyPress(Player(i), OSKEY_Y, OSKEY_META.NONE, true)
+		trig2.addAction(function callback)
+		trig3.registerPlayerKeyPress(Player(i), OSKEY_U, OSKEY_META.NONE, true)
+		trig3.addAction(function onSetSpawn)
+		trig4.registerPlayerKeyPress(Player(i), OSKEY_ESCAPE, OSKEY_META.NONE, true)
+		trig4.addAction(function onEsc)
+		spawnCount[i] = 1
+		activeFrame[i] = humanRaceFrame
+		activeFrame[i].setVisible(true)
+
+
+function toggleMenu()
+	boolean flag
+	player p
+
+	if cheatMenuButton == null
+		initSpawnMenu()
+
+	for i = 0 to bj_MAX_PLAYER_SLOTS
+		if isRevealed[i]
+			flag = false
+			if isSettingPoint[i]
+				endSpawnPointSet(i)
+			if spawnPointFx[i] != null
+				spawnPointFx[i].destr()
+				spawnPointFx[i] = null
+			closeMenu(Player(i))
+		else
+			flag = true
+		p = Player(i)
+		cheatMenuButton.setVisibleFor(p, flag)
+		spawnPointButton.setVisibleFor(p, flag)
+		amountSlider.setVisibleFor(p, flag)
+		amountIndicator.setVisibleFor(p, flag)
+		playerSlider.setVisibleFor(p, flag)
+		playerIndicator.setVisibleFor(p, flag)
+		isRevealed[i] = flag
+
+init
+	CreateTrigger()
+	..registerPlayerChatEvent(Player(0), "openspawnmenu", true)
+	..addAction(function toggleMenu)
+
+	//toggleMenu()
+	
